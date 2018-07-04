@@ -12,7 +12,7 @@ import { createStore } from 'redux';
  * 根据不同的约定（如方法映射）来判断，只要适用你的项目即可。
  */
 function counter(state = 0, action) {
-    console.log('vip-state', state);
+    console.log('vip-demo-redux', state);
     switch (action.type) {
         case 'INCREMENT':
             return state + 1;

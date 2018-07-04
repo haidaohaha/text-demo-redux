@@ -21,13 +21,14 @@ class App extends Component {
     }
     render() {
         console.log('vip-props', this.props);
+        // return <p>1234</p>
         return (
             <div>
                 <h2>受控制的数字：{this.props.num}</h2>
                 <button onClick={this.props.addNum}>数字加一</button>
                 <button onClick={this.props.minusNum}>数字减一</button>
-                {/* <button onClick={this.props.AddNumAsync}>拖1s再加一</button> */}
-                <button onClick={this.handleAddNumAsync.bind(this)}>拖1s再加一</button>
+                <button onClick={this.props.AddNumAsync}>拖1s再加一</button>
+                {/* <button onClick={this.handleAddNumAsync.bind(this)}>拖1s再加一</button> */}
             </div>
         );
     }

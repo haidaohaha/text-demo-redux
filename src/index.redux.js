@@ -3,14 +3,14 @@ const DECREMENT = 'DECREMENT';
 const initState = 0;
 // 纯函数暴露出去
 export function counter(state = initState, action) {
-    console.log('vip-state', state);
+    console.log('vip-index-redux', state);
     switch (action.type) {
         case 'INCREMENT':
             return state + 1;
         case 'DECREMENT':
             return state - 1;
         default:
-            return state;
+            return 10;
     }
 }
 
