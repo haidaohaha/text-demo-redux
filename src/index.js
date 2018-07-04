@@ -7,10 +7,10 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from './my.redux';
 import { counter } from './index.redux';
-import Grandfather from './demo.context';
+import { Grandfather } from './demo.context';
 
 import './demo.redux';
-const store = createStore(counter);
+// const store = createStore(counter);
 
 ReactDOM.render(<Grandfather />, document.getElementById('root'));
 
