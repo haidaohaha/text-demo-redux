@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
+import { connect } from './my.react.redux';
 import { addNum, minusNum, AddNumAsync } from './index.redux';
 // @connect(
 //     state => state,
