@@ -4,6 +4,7 @@ const initState = 0;
 // 纯函数暴露出去
 export function counter(state = initState, action) {
     console.log('vip-index-redux', state);
+    console.log('vip-index-action', action);
     switch (action.type) {
         case 'INCREMENT':
             return state + 1;
@@ -20,10 +21,11 @@ export function addNum() {
 export function minusNum() {
     return { type: DECREMENT };
 }
-export function AddNumAsync() { // 缺少中间件 实现不了异步操作
+export function AddNumAsync() {
+    // 缺少中间件 实现不了异步操作
     return dispatch => {
         setTimeout(() => {
-            dispatch(addNum);
+            dispatch(addNum());
         }, 1000);
     };
 }

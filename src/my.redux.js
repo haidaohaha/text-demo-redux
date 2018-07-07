@@ -1,6 +1,23 @@
-import { ReadStream } from 'tty';
+export function applyMiddleware(middleware) {
+    return createStore => (...args) => {
+        const store = createStore(...args);
+        let dispatch = store.dispatch;
+        const midApi = {
+            getState: store.getState,
+            dispatch: (...args) => dispatch(...args)
+        };
+        dispatch = middleware(midApi)(store.dispatch);
+        return {
+            ...store,
+            dispatch
+        };
+    };
+}
 
-export function createStore(reducer) {
+export function createStore(reducer, enhance) {
+    if (enhance) {
+        return enhance(createStore)(reducer);
+    }
     let currentState = {};
     let currentListeners = [];
 
@@ -39,16 +56,16 @@ function bindActionCreator(creator, dispatch) {
 export function bindActionCreators(creators, dispatch) {
     console.log('vip-creators', creators);
     console.log('vip-dispatch', dispatch);
-    // let bound = [];
-    // Object.keys(creators).forEach(v => {
-    //     let creator = creators[v];
-    //     bound[v] = bindActionCreator(creator, dispatch);
-    // });
-    // return bound;
-    return Object.keys(creators).reduce((rst, item) => {
-        rst[item] = bindActionCreator(creators[item], dispatch);
-        return rst; // 注意 rst 是一个对象，每次 key 是不同的，这样你就能理解了
-    }, {});
+    let bound = [];
+    Object.keys(creators).forEach(v => {
+        let creator = creators[v];
+        bound[v] = bindActionCreator(creator, dispatch);
+    });
+    return bound;
+    // return Object.keys(creators).reduce((rst, item) => {
+    //     rst[item] = bindActionCreator(creators[item], dispatch);
+    //     return rst; // 注意 rst 是一个对象，每次 key 是不同的，这样你就能理解了
+    // }, {});
 
     // reduce 遍历之后，需要累加 操作的
 }
