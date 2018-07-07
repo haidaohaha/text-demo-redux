@@ -7,6 +7,7 @@ export function applyMiddleware(middleware) {
             dispatch: (...args) => dispatch(...args)
         };
         dispatch = middleware(midApi)(store.dispatch);
+        // dispatch = middleware(midApi)(store.dispatch)(action);
         return {
             ...store,
             dispatch
