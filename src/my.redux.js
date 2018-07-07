@@ -49,4 +49,6 @@ export function bindActionCreators(creators, dispatch) {
         rst[item] = bindActionCreator(creators[item], dispatch);
         return rst; // 注意 rst 是一个对象，每次 key 是不同的，这样你就能理解了
     }, {});
+
+    // reduce 遍历之后，需要累加 操作的
 }
