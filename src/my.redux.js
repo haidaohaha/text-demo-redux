@@ -1,12 +1,18 @@
 export function applyMiddleware(middleware) {
     return createStore => (...args) => {
+        // 获取原生的
         const store = createStore(...args);
         let dispatch = store.dispatch;
+
+        // 对原生的进行扩展
         const midApi = {
             getState: store.getState,
             dispatch: (...args) => dispatch(...args)
         };
+       
+        // 使用 middleware 方法，扩展
         dispatch = middleware(midApi)(store.dispatch);
+        // 下面这句话，如果不理解，断点看一下
         // dispatch = middleware(midApi)(store.dispatch)(action);
         return {
             ...store,

@@ -2,7 +2,7 @@ const thunk = ({ dispatch, getState }) => next => action => {
     if (typeof action === 'function') {
         return action(dispatch, getState);
     }
-    // 默认什么都不干  
+    // 默认什么都不干， 即当前的中间件不执行，执行下一层中间件  
     return next(action);
 };
 
