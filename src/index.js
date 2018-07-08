@@ -12,9 +12,10 @@ import { counter } from './index.redux';
 import { Grandfather } from './demo.context';
 // import thunk from 'redux-thunk';
 import thunk from './my.redux.thunk';
+import arrThunk from './my.redux.arrThunk';
 
 // import './demo.redux';
-const store = createStore(counter, applyMiddleware(thunk));
+const store = createStore(counter, applyMiddleware(arrThunk, thunk));
 
 // ReactDOM.render(<Grandfather />, document.getElementById('root'));
 

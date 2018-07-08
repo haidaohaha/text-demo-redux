@@ -29,3 +29,9 @@ export function AddNumAsync() {
         }, 1000);
     };
 }
+
+// 定制中间件 使用 函数
+export function AddNumRandom() {
+    // return [{ type: INCREMENT }, { type: INCREMENT }];
+    return [{ type: INCREMENT }, AddNumAsync(), AddNumAsync()];
+}

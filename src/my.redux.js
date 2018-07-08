@@ -1,4 +1,6 @@
-export function applyMiddleware(middleware) {
+// export function applyMiddleware(middleware) { // 单个中间件
+export function applyMiddleware(...middlewares) {
+    // 多个中间件
     return createStore => (...args) => {
         // 获取原生的
         const store = createStore(...args);
@@ -9,9 +11,12 @@ export function applyMiddleware(middleware) {
             getState: store.getState,
             dispatch: (...args) => dispatch(...args)
         };
-       
+
         // 使用 middleware 方法，扩展
-        dispatch = middleware(midApi)(store.dispatch);
+        // dispatch = middleware(midApi)(store.dispatch);
+        const middlewareChain = middlewares.map(middleware => middleware(midApi));
+
+        dispatch = compose(...middlewareChain)(store.dispatch);
         // 下面这句话，如果不理解，断点看一下
         // dispatch = middleware(midApi)(store.dispatch)(action);
         return {
@@ -19,6 +24,21 @@ export function applyMiddleware(middleware) {
             dispatch
         };
     };
+}
+
+// compose(fn1,fn2,fn3,fn4)
+// 实现这种输出 fn1(fn2(fn3(fn4())))
+
+export function compose(...funcs) {
+    if (funcs.length === 0) {
+        return arg => arg;
+    }
+
+    if (funcs.length === 1) {
+        return funcs[0];
+    }
+
+    return funcs.reduce((rst, item) => (...args) => rst(item(...args)));
 }
 
 export function createStore(reducer, enhance) {
