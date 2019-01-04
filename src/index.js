@@ -9,7 +9,7 @@ import { Provider } from './my.react.redux';
 import { createStore, applyMiddleware } from './my.redux';
 // import { createStore } from 'redux';
 import { counter } from './index.redux';
-import { Grandfather } from './demo.context';
+// import { Grandfather } from './demo.context';
 // import thunk from 'redux-thunk';
 import thunk from './my.redux.thunk';
 import arrThunk from './my.redux.arrThunk';
